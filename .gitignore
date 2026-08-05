@@ -1,0 +1,22 @@
+# Veriler ve yerel veritabanı (taşınabilir veri — yüklenmez)
+database.sqlite
+database.sqlite-*
+*.sqlite
+*.sqlite3
+
+# Dosya ekleri ve yedekler
+/uploads/*
+/backup/*
+!/uploads/.gitkeep
+!/backup/.gitkeep
+
+# README ekran görüntüleri (şahsi görseller)
+/database/README.php
+/screenshots/*
+!/screenshots/.gitkeep
+
+# Sistem
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
