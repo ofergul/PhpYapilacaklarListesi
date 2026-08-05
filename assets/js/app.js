@@ -222,7 +222,7 @@ function app() {
             this.pomodoro.seconds = this.pomodoro.total = (this.settingsForm.pomodoro_focus || 25) * 60;
 
             this.bindShortcuts();
-            await Promise.all([this.loadFolders(), this.loadTags(), this.loadStats(), this.loadBackups(), this.loadActivity()]);
+            await Promise.allSettled([this.loadFolders(), this.loadTags(), this.loadStats(), this.loadBackups(), this.loadActivity()]);
             await this.reloadTasks();
             this.loadCalendarTasks();
             if (this.view === 'dashboard') this.loadDashToday();
@@ -355,28 +355,38 @@ function app() {
         },
 
         async loadFolders() {
-            const data = await api('api.php?action=folders');
-            this.folders = data.folders;
+            try {
+                const data = await api('api.php?action=folders');
+                this.folders = data.folders;
+            } catch (e) { this.toast(e.message, 'error'); }
         },
         async loadTags() {
-            const data = await api('api.php?action=tags');
-            this.tags = data.tags;
+            try {
+                const data = await api('api.php?action=tags');
+                this.tags = data.tags;
+            } catch (e) { this.toast(e.message, 'error'); }
         },
 
         async loadStats() {
-            const data = await api('api.php?action=stats');
-            this.stats = data.stats;
-            this.$nextTick(() => this.renderDashboardChart());
+            try {
+                const data = await api('api.php?action=stats');
+                this.stats = data.stats;
+                this.$nextTick(() => { try { this.renderDashboardChart(); } catch (e) { /* sessiz */ } });
+            } catch (e) { this.toast(e.message, 'error'); }
         },
 
         async loadActivity() {
-            const data = await api('api.php?action=activity&limit=15');
-            this.activity = data.activity;
+            try {
+                const data = await api('api.php?action=activity&limit=15');
+                this.activity = data.activity;
+            } catch (e) { this.toast(e.message, 'error'); }
         },
 
         async loadBackups() {
-            const data = await api('api.php?action=backup_list');
-            this.backups = data.backups;
+            try {
+                const data = await api('api.php?action=backup_list');
+                this.backups = data.backups;
+            } catch (e) { this.toast(e.message, 'error'); }
         },
 
         /* ---------- Listeler ---------- */
