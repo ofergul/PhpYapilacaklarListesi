@@ -32,11 +32,11 @@
 
 <p align="center">
   <img src="screenshots/kanban.png" alt="Kanban görünümü" width="48%">
-  <img src="screenshots/task-modal.png" alt="Görev modalı" width="48%">
+
 </p>
 
 <p align="center">
-  <img src="screenshots/reports.png" alt="Raporlar görünümü" width="48%">
+
   <img src="screenshots/dark-theme.png" alt="Koyu tema" width="48%">
 </p>
 
