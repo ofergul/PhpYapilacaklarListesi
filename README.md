@@ -32,12 +32,12 @@
 
 <p align="center">
   <img src="screenshots/kanban.png" alt="Kanban görünümü" width="48%">
-
+  <img src="screenshots/dark-theme.png" alt="Koyu tema" width="48%">
 </p>
 
 <p align="center">
 
-  <img src="screenshots/dark-theme.png" alt="Koyu tema" width="48%">
+
 </p>
 
 ---
