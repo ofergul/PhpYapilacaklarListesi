@@ -22,8 +22,7 @@
 
 ## 🖥️ Ekran Görüntüleri
 
-> Görseller `screenshots/` klasöründen yüklenir. (Örnek görselleri yerleştirmek için
-> kendi ekran görüntülerinizi aynı adlarla bu klasöre koyun.)
+
 
 <p align="center">
   <img src="screenshots/dashboard.png" alt="Dashboard görünümü" width="48%">
