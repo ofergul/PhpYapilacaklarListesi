@@ -14,7 +14,7 @@ const BOOT = JSON.parse(document.getElementById('boot-data').textContent);
  * @param {string} url
  * @param {object} [opts]
  */
-async function api(url, opts = {}) {
+async function api(url, opts = {}, retries = 1) {
     const headers = new Headers(opts.headers || {});
     if (!(opts.body instanceof FormData)) {
         headers.set('Content-Type', 'application/json');
@@ -27,7 +27,11 @@ async function api(url, opts = {}) {
         if (!data.ok) throw new Error(data.error || 'İşlem başarısız');
         return data;
     }
-    return res;
+    if (retries > 0 && res.status !== 401 && res.status !== 403) {
+        await new Promise((r) => setTimeout(r, 350));
+        return api(url, opts, retries - 1);
+    }
+    throw new Error('Sunucudan geçersiz yanıt (HTTP ' + res.status + ')');
 }
 
 /** HTML'e güvenli kaçırma (XSS koruması). */
@@ -147,7 +151,7 @@ function app() {
         contextPos: '',
         toasts: [],
         toastSeq: 0,
-        cal: { mode: 'month', year: 0, month: 0, selected: '' },
+        cal: (() => { const _n = new Date(); return { mode: 'month', year: _n.getFullYear(), month: _n.getMonth(), selected: '' }; })(),
         dragTask: null,
         kanbanCols: [
             { status: 0, label: 'Bekliyor', color: '#98989D' },
